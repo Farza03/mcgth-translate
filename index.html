@@ -1,0 +1,166 @@
+<html>
+
+<head>
+	<meta charset="UTF8" />
+	<title>Trip Translator</title>
+	<link rel="icon" href="https://common.ets2mcg.com/img/favicon.ico" type="image/x-icon">
+	<meta name="theme-color" content="#f7d331">
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+	<script src="js/translationData.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Sarabun&display=swap" rel="stylesheet">
+
+	<style>
+		* {
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Sarabun', sans-serif;
+		}
+
+		#input {
+			height: 500px;
+			margin: 0 auto;
+			display: block;
+		}
+
+		#result {
+			height: 500px;
+		}
+
+		.marginVert {
+			margin: 10px 0px;
+		}
+
+		.pageBlock {
+			width: 100%;
+		}
+
+		body {
+			background-color: #ffffff;
+			margin: 0;
+		}
+
+		button {
+			padding: 20px 0px;
+			height: 8vh;
+		}
+
+		div.page {
+			margin: 0 auto;
+			padding: 50px 100px;
+			width: calc(1000px - 200px);
+			background-color: #ababab;
+		}
+
+		h1 {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		img.emoji {
+			height: 1em;
+			width: 1em;
+			margin: 0 .05em 0 .1em;
+			vertical-align: -0.1em;
+		}
+
+		textarea {
+			background-color: white;
+			color: black;
+		}
+
+		.wordElem {
+			display: inline-block;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			* {
+				color: white;
+			}
+
+			body {
+				background-color: #000000;
+			}
+
+			div.page {
+				background-color: #333333;
+			}
+
+			textarea {
+				background-color: black;
+				color: white;
+				font-size: 2vh;
+			}
+
+			button {
+				color: black;
+			}
+
+			input {
+				background-color: #000000;
+				color: white;
+			}
+		}
+
+		@media (max-width: 1200px) {
+			* {
+				font-size: 50px;
+			}
+
+			body {
+				background-color: #ababab;
+			}
+
+			button {
+				font-size: 50px;
+			}
+
+			div.page {
+				padding: 50px;
+				width: calc(100% - 100px);
+			}
+
+			h1 {
+				font-size: 80px;
+			}
+
+			h2 {
+				font-size: 60px;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					background-color: #333333;
+				}
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page">
+		<h1 class="emojiIncluded">ETS2MCG 🇹🇭 โปรแกรมแปลภาษาสำหรับทริปและคอนวอย</h1>
+		<h2>ข้อความต้นฉบับ</h2>
+		<textarea id="input" class="pageBlock" placeholder="วางข้อความที่นี่"></textarea>
+		<label><input id="useKoreanText" type="checkbox" checked />ใช้ชื่อเมืองเป็นภาษาอังกฤษ (หากไม่ได้ติ๊ก จะใช้ชื่อเมืองเป็นภาษาท้องถิ่นของเมืองนั้น ๆ)</label>
+		<button id="process" type="submit" class="marginVert pageBlock">แปล</button>
+		<div id="onFinish" style="display: none;">
+			<h2>ผลลัพธ์</h2>
+			<textarea id="result" class="pageBlock" style="display: block;"
+				placeholder="ผลลัพธ์ที่ได้จากการแปลจะปรากฎที่นี่"></textarea>
+            <button id="copy" type="submit" style="display: block;" class="marginVert pageBlock">คัดลอก</button>
+            <!--
+			<label style="width: 100%;">Discord Webhook URL: </label>
+			<input type="password" id="token" style="width: 100%;" />
+			<button style="width: 100%; background-color: PaleGreen;" id="isConvoy">โพสต์ไปที่ช่อง Convoy</button>
+			<label style="width: 100%" id="urlCount">จำนวน URL ของรูปภาพ: 0</label>
+			<textarea id="addUrl" class="pageBlock" style="display: block;"
+				placeholder="เพิ่ม URL ของรูปภาพ คั่นด้วยตัวแบ่งบรรทัด"></textarea>
+			<button style="width: 100%; background-color: gray;" id="addUrlBtn">Add URL</button>
+			<button style="width: 100%; background-color: gray;" id="clearUrlBtn">Reset URL</button>
+            <button style="width: 100%;" id="postTrip">โพสต์!</button>
+            //-->
+		</div>
+	</div>
+</body>
+
+</html>
