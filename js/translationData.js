@@ -268,6 +268,8 @@ class Translator {
         put("Service", "ร้านซ่อมรถ");
         put("Car Parking", "ที่จอดรถ");
         put("Car parking", "ที่จอดรถ");
+        put("Rest Area", "ที่จอดรถ");
+        put("Rest area", "ที่จอดรถ");
 //        put("LKW", "LKS");
 //        put("Strokes", "발작");
         put("Port calais", "ท่าเรือ Calais");
@@ -520,7 +522,7 @@ $(document).ready(() => {
                 buffer = "**★ ETS2MCG คอนวอยประจำสัปดาห์ ★**";
                 appendText();
                 continue;
-            } else if (curLine.includes("★") && (curLine.includes("Convoy") || curLine.includes("DLC") || curLine.includes("Trip"))) {
+            } else if (curLine.includes("★") && (curLine.includes("Convoy") || curLine.includes("DLC") || curLine.includes("Trip") || curLine.includes("Event"))) {
                 if (!curLine.includes("**")) {
                     curLine = "**" + curLine + "**";
                 }
@@ -532,15 +534,34 @@ $(document).ready(() => {
             if (curLine.startsWith("Date:")) {
                 let date = curLine.substring(5).trim();
                 let dates = date.split(" ");
-                if (dates.length == 3) {
-                    let year = dates[2];
-                    let month = dates[1];
-                    let day = dates[0];
+                if (dates.length == 4) {
+                    let year = dates[3];
+                    let month = dates[2];
+                    let day = dates[1];
+                    let name = dates[0]
 
                     year = parseInt(year) + 543;
 
                     if (day.length == 1) day = "0" + day;
-                    curLine = "วันที่: " + day + " " + month + " " + year;
+
+                    name = name.slice(0, -1).toLowerCase();
+                    console.log(name);
+                    if (name === "sunday") {
+                        name = "วันอาทิตย์";
+                    } else if (name === "monday") {
+                        name = "วันจันทร์";
+                    } else if (name === "tuesday") {
+                        name = "วันอังคาร";
+                    } else if (name === "wednesday") {
+                        name = "วันพุธ";
+                    } else if (name === "thursday") {
+                        name = "วันพฤหัสบดี";
+                    } else if (name === "friday") {
+                        name = "วันศุกร์";
+                    } else if (name === "saturday") {
+                        name = "วันเสาร์";
+                    }
+                    curLine = "วันที่: " + name + " " + day + " " + month + " " + year;
                 } else {
                     curLine = "วันที่: " + date;
                 }
@@ -557,7 +578,7 @@ $(document).ready(() => {
             } else if (curLine.startsWith("Trailer:")) {
                 let data = curLine.substring(8);
                 if (data.includes("Own Trailer")) {
-                    data = " พ่วงส่วนตัว";
+                    data = " พ่วงส่วนตัว (Own Trailer)";
                 }
                 curLine = "พ่วง:" + data;
             } else if (curLine.startsWith("Skin:")) {
