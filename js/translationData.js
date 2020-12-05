@@ -309,6 +309,7 @@ class Translator {
 //        put("Point 1 and 3", "1, 3 포인트");
         put("Convoy Leader:", "ผู้คุมนำขบวน:");
         put("Convoy Tail:", "ผู้คุมท้ายขบวน:");
+        put("Free (NO 8x4)", "อิสระ (ยกเว้น 8x4)");
 
         // Sentences
         put("Rules", "กฎ");
